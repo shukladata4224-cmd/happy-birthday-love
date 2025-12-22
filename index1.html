@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To My Love - My Life</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- 1. Global Styles and ELEGANT SUNFLOWER Palette --- */
+        :root {
+            --color-muted-gold: #B8860B;      /* Elegant Accent */
+            --color-sage-green: #6B8E23;      /* Professional Primary */
+            --color-deep-brown: #332c24;      /* Text/Contrast */
+            --color-light-cream: #FDFCEF;     /* Soft Background Base */
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Cormorant Garamond', serif;
+            --color-message-yellow: #FFCC33;  /* New Color for Message Section */
+        }
+
+        body {
+            font-family: var(--font-sans);
+            margin: 0;
+            padding: 0;
+            color: var(--color-deep-brown);
+            background-color: var(--color-light-cream);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-serif);
+            color: var(--color-deep-brown);
+            margin: 0.5em 0;
+        }
+
+        section {
+            padding: 100px 5%;
+            text-align: center;
+            position: relative;
+        }
+
+        /* 1. PETAL FALLING ANIMATION (REFINED FOR TRANSPARENCY/COVERAGE) */
+        .petal {
+            position: absolute;
+            width: 15px;
+            height: 8px;
+            background-color: var(--color-muted-gold);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.6; /* Reduced opacity for transparency */
+            animation: fall linear infinite;
+            z-index: 1000; /* Ensure petals are always on top */
+        }
+
+        @keyframes fall {
+            /* Start point slightly higher than viewport */
+            0% { transform: translateY(-15vh) rotate(0deg); opacity: 0; } 
+            10% { opacity: 0.6; } /* Max opacity matches the petal definition */
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        
+        /* --- 2. Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-image: url('https://i.pinimg.com/736x/30/82/c4/3082c4a86ed713664abc33df697d0f17.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.3);
+            color: white; 
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero h1 {
+            font-size: 5em;
+            color: var(--color-muted-gold);
+            animation: dropIn 1.5s ease-out;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.6em;
+            font-weight: 300;
+            animation: fadeIn 2s ease-in-out 0.5s forwards;
+            font-weight: 450; /* Slightly heavier for readability */
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            
+
+        }
+
+        @keyframes dropIn {
+            0% { transform: translateY(-100px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* --- 3. Simple Photo Grid --- */
+        .photo-collage {
+            background-image: url('https://i.pinimg.com/736x/30/82/c4/3082c4a86ed713664abc33df697d0f17.jpg');
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 50px auto 0;
+        }
+
+        .photo-tile {
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 6px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0; /* Hidden for scroll animation */
+            border: 3px solid var(--color-muted-gold);
+        }
+
+        /* Professional Hover Animation */
+        .photo-tile:hover {
+            transform: scale(1.40);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25);
+            cursor: pointer;
+        }
+
+        /* 2. MESSAGE SECTION (YELLOWISH) */
+        .message-section {
+            background-color: var(--color-message-yellow); /* Yellowish Gold */
+            color: var(--color-deep-brown); /* Dark text for contrast */
+            border-top: 5px solid var(--color-deep-brown);
+            padding: 80px 5%;
+        }
+
+        .message-section h2 {
+            font-size: 3.5em;
+            color: var(--color-deep-brown);
+            margin-bottom: 20px;
+        }
+
+        .message-section p {
+            font-size: 1.5em;
+            font-weight: 450; /* Slightly heavier for readability */
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* 4. FOOTER (CENTERED AND CUSTOM TEXT) */
+        footer {
+            background-color: var(--color-deep-brown);
+            color: var(--color-light-cream);
+            padding: 20px;
+            font-size: 1.1em;
+            border-top: 5px solid var(--color-muted-gold);
+            text-align: center; /* Centering the footer text */
+        }
+        
+        /* --- JavaScript Dependency for Scroll Animations --- */
+        .hidden { opacity: 0; transform: translateY(20px); }
+        .show { opacity: 1; transform: translateY(0) !important; transition: opacity 1s ease-out, transform 1s ease-out; }
+
+    </style>
+</head>
+<body>
+    
+    <audio controls loop autoplay style="display: none;"> 
+      <source src="music.mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
+    <header class="hero">
+
+        <div class="sun-burst" style="background: rgba(255, 255, 255, 0.1); border-radius: 50%; position: absolute; width: 60vh; height: 60vh; animation: pulse 10s infinite alternate;"></div>
+        
+        <h1>To My Little Sunshine, Happy Birthday.</h1>
+        <p>Happy Birthday, My Love.
+My Baby, My Sweetu, My Life.
+You’re the calm in my chaos,
+the smile I look for every day.
+My Soulmate, My Wifey,
+My World, My Everything.
+With you, every moment 
+feels so warm and full.
+This day is so special for me - it gave me you - My Beautiful Baby, Navu.</p>
+    </header>
+
+    <section class="photo-collage" id="photos">
+        <h2></h2>
+        <div class="photo-grid">
+            <div class="photo-tile hidden" style="background-image: url('pic1.jpeg');"></div>
+            <div class="photo-tile hidden" style="background-image: url('pic2.jpeg');"></div>
+            <div class="photo-tile hidden" style="background-image: url('pic3.jpeg');"></div>
+            <div class="photo-tile hidden" style="background-image: url('pic9.jpeg');"></div>
+            <div class="photo-tile hidden" style="background-image: url('pic5.jpeg');"></div>
+            <div class="photo-tile hidden" style="background-image: url('pic6.jpeg');"></div>
+            </div>
+    </section>
+
+    <section class="message-section hidden" id="message">
+        <h2>Happy, Happy, Happpy Birthdayyy, Babyyyy! </h2>
+        <p>Hieee my little cutu cutu cutu sunflower baby, omg omg omg, i am soooo happpppppppyyyyyyy, it's your birthday, yaayyyyyyyy (sorry emojis aren't supported here, but uk my emotions). Happppyyyyyyyy 19th buddhhhuuuu, kitni badiiii hogyi tuuuuu (mujhse toh chhoti hi haii, hahaha) but seriously I ammm sooo happy, i am so glad that I cannnn seee u groww so closely, see u being so responsible, soo mature, soo grounded - sucha sucha sucha GREATTT HUMAN BEING. I AM SOOO SOOO SOOO PROUD OF YOU NAVYA, I AM PROUD OF EVERYTHING U DO - YOUREE SO PERFECT, HOWWWW AREEE I SO FREAKING PERFECT ?!!!! OHH I LOVE YOU I LOVE YOU I LOVE YOUU, AAAHHHHHHHH !!!!!! I AM SOO HAPPY I CANT EXPRESS!!!! I AM SHORT OF WORDSSSS, KAISEE BTAUN TERKOOOO, KYA FEEL KRRA MAI...MAI KHUDKE BDAY K LIYE JITNA KAM EXCITED HOTA HU, USSEE 100000X ZYADA TERE BDAY K LIYE ZYADA EXCITED HOTA HUU...AURRR TUUUUUU ITNIII SUNDARRR KAISEEE HAIII, MAIIII TOH SAMAJHHH HI NHI PAAA RHAAA TUNE MUJHEEE KAISE PASND KRLIYAA HAI, KITNIII SUNDARR HAI TUU !!!!!! HAYYYEEE NAZARRR NA LAGEEE...mai yeh sab likhte hue literally pagal ho rha huuu, itna zyada khushhh hu mai...i love you sooo much, i can onlyyy wishhh for immense amount off happiness for youuuuu, i justtt want to seee you happpyyy, seee u smiling, alwaysss, giggling, i want to hear your laughter all day long 24x7 365daysss, i canntttt find wordssss, thisss dayyy is so so so special for me navuuuu, myy favourite dayyyy - ITS NO LESS THAN A FESTIVAL FOR MEEE, i waitt for itttt harr sal pagalo ki tarahhh... I BELIEVE ME NAVUUUU I PLANNNN SOOO MUCH EVERYYY YEAR, MAIIII ITNAAAA KUCHHH KRNA CHAHTA HUUU TERE LIYEEE - KI AGAR MAI APNAA DILL NIKALLL KR BHI TERKOO DEDUUU TOH WOH BHI BAHOOOOTTTT KAM HAI, MAI TERE LIYE KITNA KUCHH KRNA CHAHTA HU NAVYA, AND I HATEEE THIS EVERY YEAR KI JITNA MAI SOCHTA HU USKA 10% BHI NHI KR PATA, BASS MERKO WOH DIN CHAHIYE JABB MAI ATLEAST APNE PLAN KA 80 90% TOH TERKO DE PAUNN, KYUNKIII WAISE TOH YOU DESERVE THE WORLD TOH KUCH BHI TERE LIYE KAAFI NHI HAI...AND BABYYYYY THANKKKKKKYOUUUUU FOR EVERYTHING, YOU'RE MY INSPIRATION, YOURE MY HOPE, I CANT EVEN TELL U KI TERA KITNA BADA ROLE RAHA HAI OVER THE LAST FEW YEARS IN SHAPING ME, SHAPING US, OUR RELATIONSHIP - YOU ARE LITERALLY THE ENGINE OF OUR RELATIONSHIP, YOU CONTROL EVERYTHING SO PERFECTLY BABY... I am sooo sooo soooo grateful to God that I have u in my life baby, I AMMMM LITERALLY NOTHING NOTHING NOTHING WITHOUT YOU NAVUUUUU - YOU MEAN THE WORLD TO ME....and seee baby ik we couldn't do things according to our wish this timee, and i too am very sad for it - but at last I really know and I hope that in the near future hum apni expectations se bhi zyada achha celebration krengee, we just have to be patient baby....CHALOOOO ISIII BAAAT PEEE YAAHN SE CHALTE HAINNN, WARNA MAI TOH BOLTA HI RAHUNGA...aahhhhhhhhhhhh, happpppyyyyyyy birthday babyyyyyyyyyyy, mayyyyyy godddd blesss u my love, my life, my goddess, whoop even am I without u - u define me baby, u give me a purpose to live...i am so immensely thankful to u baby - LIFE IS SO SO SO BEAUTIFUL AND LIVEABLE WITH YOU MY PRETTIEST BABYYY- i wishhhh YOUUUU allll the very very very very best forrrrr your future, may u achieve EVERYYY THING YOU WISHHHH AND WORK FOR...I WANNNTTT TOOO SEEEEE SUCCESSFUL, I WANNNTTT TO BE WITH YOUUUUUU, BESIDE33 U WHENNNN U ACHIEVE YOUR GOALLLLLSSS - BABBYYY ILL CHEERR THE LOUDEST - I AMMM SO PROUD OF YOUUUUU - YOURREE SOO PERFECT - YOUUUUU DESERVE THE WORLD BABYYY !!!!!!!! Once againnnn, happpyyy happppppy happpppy happppppyyyy happppyyyyyy birthdaaaaaayayyyyyyyyyyyyyyy my cutu lil babyyyyyyyyyy, my love, my darling - I LOVE YOU SOOO MUCH, KEEEPPPP SMILING, DONT EVERRR LET YOUR SMILE FADE FOR ANY DAMNN REASON IN THIS WORLDDD - MAYY ALL YOUR SADNESS IN THIS UNIVERSE BE MINE, AND ALLL MY HAPPINESS BE YOURS YOURS YOURS !!!! BE HAPPY ALWAYYSS, FOLLOW YOUR HEART !! YOURE THE BEST,AND I AM ALWAYS WITH U BABY, NO MATTER WHAT !! I LOVE YOU SO MUCH !!! HAPPPYY BIRTHDAY!!!! 
+            
+            - Your Lover</p>
+    </section>
+
+    <footer>
+        <p>29.12.25</p>
+        <p>With love, Adarsh.</p>
+        
+        <p>All my rights are reserved for you &copy; forever</p>
+
+    </footer>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const audio = document.querySelector('audio');
+        
+      
+
+        // --- 2. Scroll Animation Logic (Remains the same) ---
+        const observerOptions = { root: null, threshold: 0.1 };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.photo-tile, .message-section').forEach((el, index) => {
+            if (el.classList.contains('photo-tile')) {
+                el.style.transitionDelay = `${index * 0.1}s`;
+            }
+            observer.observe(el);
+        });
+
+        // --- 3. Petal Falling Animation Logic (Remains the same) ---
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = (Math.random() * 10) + 10 + 's';
+            petal.style.animationDelay = Math.random() * 5 + 's'; 
+            document.body.appendChild(petal);
+
+            petal.addEventListener('animationend', () => {
+                petal.remove();
+            });
+        }
+
+        for (let i = 0; i < 30; i++) { createPetal(); }
+        setInterval(createPetal, 1000); 
+    });
+</script>
+</body>
+</html>
