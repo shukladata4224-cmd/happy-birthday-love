@@ -7,6 +7,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
+/* New Style for the fixed toggle button */
+        #music-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1100; /* Higher than everything else */
+            padding: 10px 15px;
+            border-radius: 50px;
+            background-color: var(--color-muted-gold);
+            color: var(--color-deep-brown);
+            border: 2px solid var(--color-deep-brown);
+            font-family: var(--font-sans);
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            /* Make it very small */
+            width: 40px; 
+            height: 40px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+        }
+
+        #music-toggle:hover {
+            background-color: #D4AF37; /* Slightly lighter gold on hover */
+        }
+        
         /* --- 1. Global Styles and ELEGANT SUNFLOWER Palette --- */
         :root {
             --color-muted-gold: #B8860B;      /* Elegant Accent */
@@ -177,10 +206,14 @@
 </head>
 <body>
     
-   <audio controls loop autoplay muted id="background-music" style="position: fixed; bottom: 10px; right: 10px; z-index: 1000; width: 150px;"> 
-  <source src="music1.mp3" type="audio/mp3">
-  Your browser does not support the audio element.
-</audio>
+   <audio id="background-music" loop autoplay muted> 
+      <source src="music1.mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
+    
+    <button id="music-toggle" title="Toggle Music">
+        🔊 </button>
+    
     <header class="hero">
 
         <div class="sun-burst" style="background: rgba(255, 255, 255, 0.1); border-radius: 50%; position: absolute; width: 60vh; height: 60vh; animation: pulse 10s infinite alternate;"></div>
@@ -226,7 +259,37 @@ This day is so special for me - it gave me you - My Beautiful Baby, Navu.</p>
     
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const audio = document.querySelector('audio');
+        const audio = document.getElementById('background-music');
+        const toggleButton = document.getElementById('music-toggle');
+        let isMuted = true; // Start state must match the HTML attribute
+
+        // --- New Music Toggle Logic ---
+        if (toggleButton && audio) {
+            // Set initial state (if autoplay fails, we need to ensure play() is called later)
+            audio.volume = 0.7; // Set a default pleasant volume
+
+            toggleButton.addEventListener('click', () => {
+                if (isMuted) {
+                    // Unmute and ensure playback starts
+                    audio.muted = false;
+                    audio.play().catch(error => {
+                        console.error("Audio playback error:", error);
+                    });
+                    toggleButton.innerHTML = '🎶'; // Change to Playing icon
+                    isMuted = false;
+                } else {
+                    // Mute the audio
+                    audio.muted = true;
+                    toggleButton.innerHTML = '🔊'; // Change to Muted icon
+                    isMuted = true;
+                }
+            });
+            
+            // Initial check: Since we start with 'autoplay muted', the music 
+            // is likely already running silently. We only need the toggle.
+        }
+
+
         
       
 
@@ -269,6 +332,7 @@ This day is so special for me - it gave me you - My Beautiful Baby, Navu.</p>
 </script>
 </body>
 </html>
+
 
 
 
