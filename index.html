@@ -10,7 +10,7 @@
         /* --- 1. Global Styles and ELEGANT SUNFLOWER Palette --- */
         :root {
             --color-muted-gold: #B8860B;      /* Elegant Accent */
-            --color-sage-green: #6B8E23;      /* Professional Primary */
+            --color-sage-green: #6B8E23;      /* Professional Primary (unused but kept) */
             --color-deep-brown: #332c24;      /* Text/Contrast */
             --color-light-cream: #FDFCEF;     /* Soft Background Base */
             --font-serif: 'Cormorant Garamond', serif;
@@ -39,6 +39,34 @@
             padding: 100px 5%;
             text-align: center;
             position: relative;
+        }
+
+        /* Fixed Music Toggle Button */
+        #music-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1100; /* Highest z-index */
+            padding: 10px 15px;
+            border-radius: 50px;
+            background-color: var(--color-muted-gold);
+            color: var(--color-deep-brown);
+            border: 2px solid var(--color-deep-brown);
+            font-family: var(--font-sans);
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 40px; 
+            height: 40px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+        }
+
+        #music-toggle:hover {
+            background-color: #D4AF37; /* Slightly lighter gold on hover */
         }
 
         /* 1. PETAL FALLING ANIMATION */
@@ -77,12 +105,12 @@
         }
 
         .hero h1 {
-            font-size: 5em;
+            font-size: 4.7em;
             color: var(--color-muted-gold);
             animation: dropIn 1.5s ease-out;
             font-weight: 700;
             text-align: center;
-            z-index: 10;
+            z-index: 10; /* Ensure H1 is above CD */
         }
 
         .hero p {
@@ -106,34 +134,33 @@
             100% { opacity: 1; }
         }
         
-        /* --- 5. CD Animation Positioning (New/Modified) --- */
+        /* --- CD Animation Positioning (New/Modified) --- */
         .cd-container {
-            position: absolute; /* Position relative to the Hero header */
-            top: 25%;
-            left: 50%;
-            transform: translateX(-50%) scale(0.8); /* Center and slightly smaller */
-            width: 250px;
-            height: 250px;
-            z-index: 5; /* Behind text, above background */
-            animation: cdDropIn 1.5s ease-out 0.5s forwards; /* Animation added for intro */
+            /* Positioned relative to the content flow in the Hero */
+            position: relative;
+            margin: 20px auto 30px auto; /* Adjust vertical spacing */
+            width: 150px; /* Smaller size for better integration */
+            height: 150px;
+            z-index: 9; 
             opacity: 0;
+            animation: cdFadeIn 1.5s ease-out 1.2s forwards; /* Delayed start */
         }
         
-        @keyframes cdDropIn {
-            0% { opacity: 0; transform: translateX(-50%) translateY(-50px) scale(0.5); }
-            100% { opacity: 1; transform: translateX(-50%) scale(0.8); }
+        @keyframes cdFadeIn {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
         .cd-disc {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            /* Make sure 1000070251.jpg is in the same folder or use a URL */
-            background-image: url('pic1.jpeg'); 
+            /* Use the uploaded image as the CD label background */
+            background-image: url('1000070251.jpg'); 
             background-size: cover;
             background-position: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-            animation: spin 6s linear infinite; /* Continuous spin */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            animation: spin 6s linear infinite; 
         }
 
         .cd-hole {
@@ -141,8 +168,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 50px;
-            height: 50px;
+            width: 30px; /* Smaller hole */
+            height: 30px;
             border-radius: 50%;
             background-color: white; 
             box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
@@ -153,8 +180,7 @@
             to { transform: rotate(360deg); }
         }
 
-
-        /* --- 3. Simple Photo Grid (Styles remain the same) --- */
+        /* --- 3. Photo Grid (Styles remain the same) --- */
         .photo-collage {
             background-image: url('https://i.pinimg.com/736x/30/82/c4/3082c4a86ed713664abc33df697d0f17.jpg');
             background-attachment: fixed;
@@ -234,10 +260,13 @@
 </head>
 <body>
     
-    <audio controls loop autoplay style="display: none;"> 
-      <source src="music.mp3" type="audio/mp3">
+    <audio id="background-music" loop autoplay muted> 
+      <source src="music4.mpeg" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
+    
+    <button id="music-toggle" title="Toggle Music">
+        🔊 </button>
     
     <header class="hero">
 
@@ -250,15 +279,18 @@
                 <div class="cd-hole"></div>
             </div>
         </div>
-        <p>Happy Birthday, My Love.
-My Baby, My Sweetu, My Life.
-You’re the calm in my chaos,
-the smile I look for every day.
-My Soulmate, My Wifey,
-My World, My Everything.
-With you, every moment 
-feels so warm and full.
-This day is so special for me - it gave me you - My Beautiful Baby, Navu.</p>
+        <p>Hey, my baby 'N', my little sun-kissed flower,</p>
+        <p>You bring the warmth to every single hour.</p>
+        <p>You’re brighter than the summer at its peak,</p>
+        <p>The happy golden glow I always seek.</p>
+        <p>Like a sunflower turning to the light,</p>
+        <p>You guide my world and make everything bright.</p>
+        <p>Ohhh N, my baby N, you're the best part of me,</p>
+        <p>You’re my sunshine, beautiful and free!</p>
+        <p>My baby 'N', you’re my beautiful life,</p>
+        <p>You chase away the shadows and the strife.</p>
+        <p>I love you more than words could ever say,</p>
+        <p>Happy, happy, happy every single day!</p>
     </header>
 
     <section class="photo-collage" id="photos">
@@ -275,9 +307,16 @@ This day is so special for me - it gave me you - My Beautiful Baby, Navu.</p>
 
     <section class="message-section hidden" id="message">
         <h2>Happy, Happy, Happpy Birthdayyy, Babyyyy! </h2>
-        <p>Hieee my little cutu cutu cutu sunflower baby, omg omg omg, i am soooo happpppppppyyyyyyy, it's your birthday, yaayyyyyyyy (sorry emojis aren't supported here, but uk my emotions). Happppyyyyyyyy 19th buddhhhuuuu, kitni badiiii hogyi tuuuuu (mujhse toh chhoti hi haii, hahaha) but seriously I ammm sooo happy, i am so glad that I cannnn seee u groww so closely, see u being so responsible, soo mature, soo grounded - sucha sucha sucha GREATTT HUMAN BEING. I AM SOOO SOOO SOOO PROUD OF YOU NAVYA, I AM PROUD OF EVERYTHING U DO - YOUREE SO PERFECT, HOWWWW AREEE I SO FREAKING PERFECT ?!!!! OHH I LOVE YOU I LOVE YOU I LOVE YOUU, AAAHHHHHHHH !!!!!! I AM SOO HAPPY I CANT EXPRESS!!!! I AM SHORT OF WORDSSSS, KAISEE BTAUN TERKOOOO, KYA FEEL KRRA MAI...MAI KHUDKE BDAY K LIYE JITNA KAM EXCITED HOTA HU, USSEE 100000X ZYADA TERE BDAY K LIYE ZYADA EXCITED HOTA HUU...AURRR TUUUUUU ITNIII SUNDARRR KAISEEE HAIII, MAIIII TOH SAMAJHHH HI NHI PAAA RHAAA TUNE MUJHEEE KAISE PASND KRLIYAA HAI, KITNIII SUNDARR HAI TUU !!!!!! HAYYYEEE NAZARRR NA LAGEEE...mai yeh sab likhte hue literally pagal ho rha huuu, itna zyada khushhh hu mai...i love you sooo much, i can onlyyy wishhh for immense amount off happiness for youuuuu, i justtt want to seee you happpyyy, seee u smiling, alwaysss, giggling, i want to hear your laughter all day long 24x7 365daysss, i canntttt find wordssss, thisss dayyy is so so so special for me navuuuu, myy favourite dayyyy - ITS NO LESS THAN A FESTIVAL FOR MEEE, i waitt for itttt harr sal pagalo ki tarahhh... I BELIEVE ME NAVUUUU I PLANNNN SOOO MUCH EVERYYY YEAR, MAIIII ITNAAAA KUCHHH KRNA CHAHTA HUUU TERE LIYEEE - KI AGAR MAI APNAA DILL NIKALLL KR BHI TERKOO DEDUUU TOH WOH BHI BAHOOOOTTTT KAM HAI, MAI TERE LIYE KITNA KUCHH KRNA CHAHTA HU NAVYA, AND I HATEEE THIS EVERY YEAR KI JITNA MAI SOCHTA HU USKA 10% BHI NHI KR PATA, BASS MERKO WOH DIN CHAHIYE JABB MAI ATLEAST APNE PLAN KA 80 90% TOH TERKO DE PAUNN, KYUNKIII WAISE TOH YOU DESERVE THE WORLD TOH KUCH BHI TERE LIYE KAAFI NHI HAI...AND BABYYYYY THANKKKKKKYOUUUUU FOR EVERYTHING, YOU'RE MY INSPIRATION, YOURE MY HOPE, I CANT EVEN TELL U KI TERA KITNA BADA ROLE RAHA HAI OVER THE LAST FEW YEARS IN SHAPING ME, SHAPING US, OUR RELATIONSHIP - YOU ARE LITERALLY THE ENGINE OF OUR RELATIONSHIP, YOU CONTROL EVERYTHING SO PERFECTLY BABY... I am sooo sooo soooo grateful to God that I have u in my life baby, I AMMMM LITERALLY NOTHING NOTHING NOTHING WITHOUT YOU NAVUUUUU - YOU MEAN THE WORLD TO ME....and seee baby ik we couldn't do things according to our wish this timee, and i too am very sad for it - but at last I really know and I hope that in the near future hum apni expectations se bhi zyada achha celebration krengee, we just have to be patient baby....CHALOOOO ISIII BAAAT PEEE YAAHN SE CHALTE HAINNN, WARNA MAI TOH BOLTA HI RAHUNGA...aahhhhhhhhhhhh, happpppyyyyyyy birthday babyyyyyyyyyyy, mayyyyyy godddd blesss u my love, my life, my goddess, whoop even am I without u - u define me baby, u give me a purpose to live...i am so immensely thankful to u baby - LIFE IS SO SO SO BEAUTIFUL AND LIVEABLE WITH YOU MY PRETTIEST BABYYY- i wishhhh YOUUUU allll the very very very very best forrrrr your future, may u achieve EVERYYY THING YOU WISHHHH AND WORK FOR...I WANNNTTT TOOO SEEEEE SUCCESSFUL, I WANNNNTT TO BE WITH YOUUUUUU, BESIDE33 U WHENNNN U ACHIEVE YOUR GOALLLLLSSS - BABBYYY ILL CHEERR THE LOUDEST - I AMMM SO PROUD OF YOUUUUU - YOURREE SOO PERFECT - YOUUUUU DESERVE THE WORLD BABYYY !!!!!!!! Once againnnn, happpyyy happppppy happpppy happppppyyyy happppyyyyyy birthdaaaaaayayyyyyyyyyyyyyyy my cutu lil babyyyyyyyyyy, my love, my darling - I LOVE YOU SOOO MUCH, KEEEPPPP SMILING, DONT EVERRR LET YOUR SMILE FADE FOR ANY DAMNN REASON IN THIS WORLDDD - MAYY ALL YOUR SADNESS IN THIS UNIVERSE BE MINE, AND ALLL MY HAPPINESS BE YOURS YOURS YOURS !!!! BE HAPPY ALWAYYSS, FOLLOW YOUR HEART !! YOURE THE BEST,AND I AM ALWAYS WITH U BABY, NO MATTER WHAT !! I LOVE YOU SO MUCH !!! HAPPPYY BIRTHDAY!!!! 
-            
-            - Your Lover</p>
+        <p>Happy Birthday, My Love.
+My Baby, My Sweetu, My Life.
+You’re the calm in my chaos,
+the smile I look for every day.
+My Soulmate, My Wifey,
+My World, My Everything.
+With you, every moment 
+feels so warm and full.
+This day is so special for me cuz it gave me you - My Beautiful Baby, Navu. Hieee my little cutu cutu cutu sunflower baby, omg omg omg, i am soooo happpppppppyyyyyyy, it's your birthday, yaayyyyyyyy (sorry emojis aren't supported here, but uk my emotions). Happppyyyyyyyy 19th buddhhhuuuu, kitni badiiii hogyi tuuuuu (mujhse toh chhoti hi haii, hahaha) but seriously I ammm sooo happy, i am so glad that I cannnn seee u groww so closely, see u being so responsible, soo mature, soo grounded - sucha sucha sucha GREATTT HUMAN BEING. I AM SOOO SOOO SOOO PROUD OF YOU NAVYA, I AM PROUD OF EVERYTHING U DO - YOUREE SO PERFECT, HOWWWW AREEE I SO FREAKING PERFECT ?!!!! OHH I LOVE YOU I LOVE YOU I LOVE YOUU, AAAHHHHHHHH !!!!!! I AM SOO HAPPY I CANT EXPRESS!!!! I AM SHORT OF WORDSSSS, KAISEE BTAUN TERKOOOO, KYA FEEL KRRA MAI...MAI KHUDKE BDAY K LIYE JITNA KAM EXCITED HOTA HU, USSEE 100000X ZYADA TERE BDAY K LIYE ZYADA EXCITED HOTA HUU...AURRR TUUUUUU ITNIII SUNDARRR KAISEEE HAIII, MAIIII TOH SAMAJHHH HI NHI PAAA RHAAA TUNE MUJHEEE KAISE PASND KRLIYAA HAI, KITNIII SUNDARR HAI TUU !!!!!! HAYYYEEE NAZARRR NA LAGEEE...mai yeh sab likhte hue literally pagal ho rha huuu, itna zyada khushhh hu mai...i love you sooo much, i can onlyyy wishhh for immense amount off happiness for youuuuu, i justtt want to seee you happpyyy, seee u smiling, alwaysss, giggling, i want to hear your laughter all day long 24x7 365daysss, i canntttt find wordssss, thisss dayyy is so so so special for me navuuuu, myy favourite dayyyy - ITS NO LESS THAN A FESTIVAL FOR MEEE, i waitt for itttt harr sal pagalo ki tarahhh... I BELIEVE ME NAVUUUU I PLANNNN SOOO MUCH EVERYYY YEAR, MAIIII ITNAAAA KUCHHH KRNA CHAHTA HUUU TERE LIYEEE - KI AGAR MAI APNAA DILL NIKALLL KR BHI TERKOO DEDUUU TOH WOH BHI BAHOOOOTTTT KAM HAI, MAI TERE LIYE KITNA KUCHH KRNA CHAHTA HU NAVYA, AND I HATEEE THIS EVERY YEAR KI JITNA MAI SOCHTA HU USKA 10% BHI NHI KR PATABASS MERKO WOH DIN CHAHIYE JABB MAI ATLEAST APNE PLAN KA 80 90% TOH TERKO DE PAUNN, KYUNKIII WAISE TOH YOU DESERVE THE WORLD TOH KUCH BHI TERE LIYE KAAFI NHI HAI...AND BABYYYYY THANKKKKKKYOUUUUU FOR EVERYTHING, YOU'RE MY INSPIRATION, YOURE MY HOPE, I CANT EVEN TELL U KI TERA KITNA BADA ROLE RAHA HAI OVER THE LAST FEW YEARS IN SHAPING ME, SHAPING US, OUR RELATIONSHIP - YOU ARE LITERALLY THE ENGINE OF OUR RELATIONSHIP, YOU CONTROL EVERYTHING SO PERFECTLY BABY... I am sooo sooo soooo grateful to God that I have u in my life baby, I AMMMM LITERALLY NOTHING NOTHING NOTHING WITHOUT YOU NAVUUUUU - YOU MEAN THE WORLD TO ME....and seee baby ik we couldn't do things according to our wish this timee, and i too am very sad for it - but at last I really know and I hope that in the near future hum apni expectations se bhi zyada achha celebration krengee, we just have to be patient baby....CHALOOOO ISIII BAAAT PEEE YAAHN SE CHALTE HAINNN, WARNA MAI TOH BOLTA HI RAHUNGA...aahhhhhhhhhhhh, happpppyyyyyyy birthday babyyyyyyyyyyy, mayyyyyy godddd blesss u my love, my life, my goddess, whoop even am I without u - u define me baby, u give me a purpose to live...i am so immensely thankful to u baby - LIFE IS SO SO SO BEAUTIFUL AND LIVEABLE WITH YOU MY PRETTIEST BABYYY- i wishhhh YOUUUU allll the very very very very best forrrrr your future, may u achieve EVERYYY THING YOU WISHHHH AND WORK FOR...I WANNNTTT TOOO SEEEEE SUCCESSFUL, I WANNNTTT TO BE WITH YOUUUUUU, BESIDE33 U WHENNNN U ACHIEVE YOUR GOALLLLLSSS - BABBYYY ILL CHEERR THE LOUDEST - I AMMM SO PROUD OF YOUUUUU - YOURREE SOO PERFECT - YOUUUUU DESERVE THE WORLD BABYYY !!!!!!!! Once againnnn, happpyyy happppppy happpppy happppppyyyy happppyyyyyy birthdaaaaaayayyyyyyyyyyyyyyy my cutu lil babyyyyyyyyyy, my love, my darling - I LOVE YOU SOOO MUCH, KEEEPPPP SMILING, DONT EVERRR LET YOUR SMILE FADE FOR ANY DAMNN REASON IN THIS WORLDDD - MAYY ALL YOUR SADNESS IN THIS UNIVERSE BE MINE, AND ALLL MY HAPPINESS BE YOURS YOURS YOURS !!!! BE HAPPY ALWAYYSS, FOLLOW YOUR HEART !! YOURE THE BEST,AND I AM ALWAYS WITH U BABY, NO MATTER WHAT !! I LOVE YOU SO MUCH !!! HAPPPYY BIRTHDAY!!!!<br>
+            - Your Lover </p>
     </section>
 
     <footer>
@@ -288,9 +327,36 @@ This day is so special for me - it gave me you - My Beautiful Baby, Navu.</p>
     
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const audio = document.querySelector('audio');
+        const audio = document.getElementById('background-music');
+        const toggleButton = document.getElementById('music-toggle');
+        let isMuted = true; // Start state must match the HTML attribute
+
+        // --- New Music Toggle Logic ---
+        if (toggleButton && audio) {
+            // Set initial state (if autoplay fails, we need to ensure play() is called later)
+            audio.volume = 0.7; // Set a default pleasant volume
+
+            toggleButton.addEventListener('click', () => {
+                if (isMuted) {
+                    // Unmute and ensure playback starts
+                    audio.muted = false;
+                    audio.play().catch(error => {
+                        console.error("Audio playback error:", error);
+                    });
+                    toggleButton.innerHTML = '🎶'; // Change to Playing icon
+                    isMuted = false;
+                } else {
+                    // Mute the audio
+                    audio.muted = true;
+                    toggleButton.innerHTML = '🔊'; // Change to Muted icon
+                    isMuted = true;
+                }
+            });
+             // Initial check: Since we start with 'autoplay muted', the music 
+             // is likely already running silently. We only need the toggle.
+        }
         
-        // --- 1. Scroll Animation Logic ---
+        // --- 2. Scroll Animation Logic (Remains the same) ---
         const observerOptions = { root: null, threshold: 0.1 };
 
         const observer = new IntersectionObserver((entries, observer) => {
@@ -302,7 +368,6 @@ This day is so special for me - it gave me you - My Beautiful Baby, Navu.</p>
             });
         }, observerOptions);
 
-        // Observe photos and message section. CD animation is now CSS/time-based.
         document.querySelectorAll('.photo-tile, .message-section').forEach((el, index) => {
             if (el.classList.contains('photo-tile')) {
                 el.style.transitionDelay = `${index * 0.1}s`;
@@ -310,7 +375,7 @@ This day is so special for me - it gave me you - My Beautiful Baby, Navu.</p>
             observer.observe(el);
         });
 
-        // --- 2. Petal Falling Animation Logic ---
+        // --- 3. Petal Falling Animation Logic (Remains the same) ---
         function createPetal() {
             const petal = document.createElement('div');
             petal.classList.add('petal');
